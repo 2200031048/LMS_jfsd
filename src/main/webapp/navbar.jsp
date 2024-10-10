@@ -1,54 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="css/style.css">
-    <title>LMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <title>Spring Boot MVC</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-image: linear-gradient(to right top, #f68600, #f68600);
+            background-color: #f0f4f8;
+        }
+        
+        .navbar {
+            background: linear-gradient(to right, #269142, #4fadd1);
+            transition: background-color 0.9s ease;
+            padding: 30px;
         }
 
-        h3 {
+        .navbar:hover {
+            background: linear-gradient(to right, #4fadd1, #269142);
+        }
+
+        .navbar .nav-link {
             color: white;
+            transition: color 0.3s ease;
+            font-weight: 500;
         }
 
-        ul {
-            list-style-type: none; /* Remove bullet points */
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Clear floats */
-            background-color: #333; /* Navbar background color */
+        .navbar .nav-link:hover {
+            color: #ffeb3b;
+            transform: scale(1.1);
         }
 
-        ul li {
-            float: left; /* Align the items horizontally */
+        .navbar .navbar-brand {
+            color: white;
+            transition: color 0.3s ease;
+            font-weight: bold;
+            font-size: 1.5rem;
         }
 
-        ul li a {
-            display: block;
-            color: white; /* Text color */
-            text-align: center;
-            padding: 14px 16px; /* Padding for each menu item */
-            text-decoration: none; /* Remove underline */
+        .navbar .navbar-brand:hover {
+            color: #ffeb3b;
+            transform: scale(1.1);
         }
 
-        ul li a:hover {
-            background-color: #111; /* Hover effect */
+        .navbar-toggler {
+            border: none; /* Remove border */
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-toggler:hover {
+            transform: rotate(90deg);
+        }
+
+        .navbar-toggler-icon {
+            background-color: white; /* Change the color of the toggler icon */
+        }
+
+        .collapse {
+            transition: max-height 0.5s ease-in-out;
         }
     </style>
 </head>
 <body>
-    <center><h3><b>Learning Management System</b></h3></center>
-    <br>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="adminlogin.jsp">Admin</a></li>
-        <li><a href="facultylogin.jsp">Faculty</a></li>
-        <li><a href="studentlogin.jsp">Student</a></li>
-    </ul>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">LMS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="home.jsp">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="adminlogin.jsp">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="facultylogin.jsp">Faculty</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="studentlogin.jsp">Student</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="about.jsp">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <br>
 </body>
 </html>

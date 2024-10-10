@@ -1,186 +1,256 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Login</title>
-    <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
     <style>
-        @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap);
-
         body {
-            background: #f5f5f5;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle at top left, #ff7e5f, #feb47b); /* Static background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
         }
 
-        .login-box {
-            background: url(https://i.pinimg.com/736x/d1/10/de/d110dee051323ffa6f981d58aa2366ea.jpg);
-            background-size: cover;
-            background-position: center;
-            padding: 50px;
-            margin: 50px auto;
-            max-width: 600px;
-            min-height: 600px;
-            border-radius: 8px;
-            -webkit-box-shadow: 0 2px 60px -5px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 2px 60px -5px rgba(0, 0, 0, 0.1);
-            color: #333;
+        .nav-links {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        .nav-links a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.5s ease, transform 0.5s ease, letter-spacing 0.5s;
+        }
+
+        .nav-links a:hover {
+            color: #ffdd57;
+            transform: scale(1.2) rotate(5deg);
+            text-shadow: 0 0 15px rgba(255, 221, 87, 0.9);
+            letter-spacing: 2px;
+        }
+
+        /* Adding underline animation on hover */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #ffdd57;
+            transition: width 0.5s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .login-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            width: 350px;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.8) rotate(-5deg);
+            animation: popUp 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popUp {
+            0% {
+                transform: scale(0.8) rotate(-5deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05) rotate(3deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .login-container:hover {
+            transform: translateY(-10px) rotate(5deg);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            transition: transform 0.6s ease, box-shadow 0.6s ease, rotate 0.6s ease;
         }
 
         .logo {
-            font-family: "Script MT", cursive;
-            font-size: 54px;
-            text-align: center;
-            color: #888888;
-            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff512f;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: slideIn 1.5s ease forwards;
         }
 
-        .logo .logo-font {
-            color: #ffc13b;
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-40px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .header-title {
-            text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             font-size: 24px;
             color: #333;
+            opacity: 0;
+            animation: fadeInUp 2s ease forwards;
         }
 
-        .login-form {
-            max-width: 400px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        @keyframes fadeInUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
-        .login-form .form-control {
-            border-radius: 5px;
+        .form-group {
             margin-bottom: 20px;
-            box-shadow: none;
+            opacity: 0;
+            animation: fadeInUp 2.5s ease forwards;
         }
 
-        .login-form .btn {
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            padding: 10px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #ff512f;
+            box-shadow: 0 0 15px rgba(255, 81, 47, 0.7);
+            outline: none;
+        }
+
+        .btn {
+            background-color: #ff512f;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
             font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
         }
 
-        .login-form .btn.btn-primary {
-            background: #ffc13b;
-            border-color: #ffc13b;
-            color: #333;
+        .btn:hover {
+            background-color: #dd2476;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(221, 36, 118, 0.5);
         }
 
-        .login-form .btn.btn-primary:hover {
-            background: #e5b500;
-            border-color: #e5b500;
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: 0;
+            height: 0;
+            border-radius: 5px;
+            border: 2px solid #ff512f;
+            transition: all 0.5s ease;
         }
 
-        .login-form .text-center a {
-            color: #ffc13b;
+        .btn:hover::before {
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+        }
+
+        .footer {
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeInUp 3s ease forwards;
+        }
+
+        .footer .text-center {
+            color: #666;
+        }
+
+        .footer .text-center a {
+            color: #ff512f;
             text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
         }
 
-        .login-form .text-center a:hover {
+        .footer .text-center a:hover {
+            color: #dd2476;
             text-decoration: underline;
         }
 
-        .carousel-inner .carousel-item {
-            text-align: center;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            -webkit-box-shadow: 0 2px 25px -3px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 2px 25px -3px rgba(0, 0, 0, 0.1);
-        }
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .login-container {
+                width: 100%;
+                margin: 0 20px;
+            }
 
-        .carousel-indicators {
-            bottom: -50px;
-        }
+            .form-control {
+                padding: 10px;
+            }
 
-        .carousel-indicators li {
-            cursor: pointer;
-        }
-
-        .carousel-control-prev,
-        .carousel-control-next {
-            width: 5%;
-        }
-
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            background-color: #ffc13b;
-            border-radius: 50%;
+            .btn {
+                padding: 10px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
-    <%@ include file="studentnavbar.jsp" %>
-
-    <section class="body">
-        <div class="container">
-            <div class="login-box">
-                <div class="logo">
-                    <span class="logo-font">Go</span>LMS
-                </div>
-                <h3 class="header-title">LOGIN</h3>
-                <form class="login-form" method="post" action="checkstudentlogin">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="email" placeholder="Email or Username" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Password" required>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary btn-block" type="submit">LOGIN</button>
-                    </div>
-                    <div class="form-group">
-                        <div class="text-center">New Member? <a href="addstudent.jsp">Sign up Now</a></div>
-                    </div>
-                </form>
-                <div class="col-sm-12 hide-on-mobile">
-                    <div id="demo" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <ul class="carousel-indicators">
-                            <li data-target="#demo" data-slide-to="0" class="active"></li>
-                            <li data-target="#demo" data-slide-to="1"></li>
-                        </ul>
-                        <!-- The slideshow -->
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="slider-feature-card">
-                                    <img src="https://i.imgur.com/YMn8Xo1.png" alt="">
-                                    <h3 class="slider-title">Welcome To LMS</h3>
-                                    <p class="slider-description">Heartily welcome to grow your skills..</p>
-                                </div>
-                            </div>
-                            <!-- 
-                            <div class="carousel-item">
-                                <div class="slider-feature-card">
-                                    <img src="https://i.imgur.com/Yi5KXKM.png" alt="">
-                                    <h3 class="slider-title">Providing Best Faculty</h3>
-                                    <p class="slider-description">Detailed explanation of every topic by excellent mentors</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Left and right controls -->
-                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </a>
-                        <a class="carousel-control-next" href="#demo" data-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </a>
-                    </div>
-                </div>
+   <div class="nav-links">
+    <div class="login-container">
+        <div class="logo">StudentLogin</div>
+        <h3 class="header-title">Login</h3>
+        <form method="post" action="checkstudentlogin">
+            <div class="form-group">
+                <input type="text" class="form-control" name="email" placeholder="Email or Username" required>
             </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+        <div class="footer">
+            <div class="text-center">New Member? <a href="addcustomer">Sign up Now</a></div>
         </div>
-    </section>
-
-    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
-    <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
+    </div>
 </body>
 </html>
